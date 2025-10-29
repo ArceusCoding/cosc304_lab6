@@ -153,6 +153,24 @@ public class OrderJDBC
         StringBuilder output = new StringBuilder();
        
         // TODO: Traverse ResultSet and use StringBuilder.append() to add columns/rows to output string
+
+        /* example piece, connection already made, put text to output instead of print
+        try ( Connection con = DriverManager.getConnection(url, uid, pw);
+              Statement stmt = con.createStatement();) 
+        {
+            ResultSet rst = stmt.executeQuery("SELECT ename,salary FROM emp");
+            System.out.println("Employee Name,Salary");
+            while (rst.next())
+            {   System.out.println(rst.getString("ename")+","+rst.getDouble("salary"));
+            }
+        }
+         */
+        Statement custList = con.createStatement();
+        ResultSet listCust = custList.executeQuery("SELECT CustomerId, CustomerName FROM Customer");
+        while (listCust.next())
+            {   output.apprend(listCust);
+        }
+
         
         return output.toString();
     }
