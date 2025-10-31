@@ -190,7 +190,17 @@ public class OrderJDBC
     public String listCustomerOrders(String customerId) throws SQLException
     {
         // TODO: Similar to listAllCustomers(), execute query and store results in a StringBuilder, then output as a String
-        return "";
+        System.out.println("Executing list all customers.");
+        StringBuilder output = new StringBuilder();
+        Statement custListOrders = con.createStatement();
+        ResultSet listOrders = custListOrders.executeQuery("SELECT OrderId, OrderDate, CustomerId, EmployeeId, Total FROM Orders 
+        WHERE CustomerId IS '" + customerId + "'");
+        while (listOrders.next())
+            {   output.apprend(listOrders);
+        }
+
+
+        return output;
     }
     
     /**
